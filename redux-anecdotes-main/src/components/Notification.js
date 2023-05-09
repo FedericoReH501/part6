@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from 'react-redux'
+import { createAnecdote } from './reducers/anecdoteReducer'
+
 const Notification = () => {
   const style = {
     border: 'solid',
