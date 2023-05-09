@@ -23,9 +23,17 @@ const Anecdote = ({anecdote})=>{
 }
 
 const Anecdotes=()=>{
-  const anecdotes = useSelector(state => state)
+  const anecdotes = useSelector(state =>{ 
+    if(state.filter === ''){
+      return state.anectodes
+    }
+    return state.anectodes.filter(a=> a.content.toLowerCase().includes(state.filter.toLowerCase()))
+    
+  })
+  
   return(
     <div>
+      <h2>Anecdotes</h2>
       {anecdotes.map(anecdote =>
       <Anecdote key={anecdote.id} 
                 anecdote={anecdote}/>
