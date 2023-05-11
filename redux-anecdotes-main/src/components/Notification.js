@@ -1,16 +1,23 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { createAnecdote } from './reducers/anecdoteReducer'
+import { useSelector } from 'react-redux'
+
 
 const Notification = () => {
+  const notification = useSelector(state=>state.notification)
   const style = {
-    border: 'solid',
+    border: 'solid green',
     padding: 10,
-    borderWidth: 1
   }
+  
   return (
-    <div style={style}>
-      render here notification...
-    </div>
+    <>
+      {notification && 
+        <div style={style}>
+        <h2>{notification}</h2>
+        </div>
+      }
+    </>
+    
+    
   )
 }
 
