@@ -5,7 +5,6 @@ const getAll = async()=>{
   const response = await axios.get(baseUrl)
   return response.data
 }
-
 const createNew = async(content)=>{
   const newAnecdote = {
     content,
