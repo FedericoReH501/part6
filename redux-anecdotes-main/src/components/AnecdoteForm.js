@@ -9,7 +9,6 @@ const AnecdotesForm = ()=>{
   const addAnecdote=async (event)=>{
     event.preventDefault()
     const content = event.target.newanec.value
-    anecdotesServices.createNew(content)
     dispatch(createAnecdote(content))
     event.target.newanec.value=''
 
