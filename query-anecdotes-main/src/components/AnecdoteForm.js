@@ -11,12 +11,22 @@ const AnecdoteForm = () => {
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
+    
     newAnecMutations.mutate({content, votes:0},
-      {onSuccess: ()=>queryClient.invalidateQueries('anecdotes')})
-    notifDispatch({type:'SHOW',payload:`you added ${content}`})
-    setTimeout(()=>notifDispatch({type:'HIDE'}),3000)
+      {onSuccess: () => {
+        queryClient.invalidateQueries('anecdotes')
+        notifDispatch({type:'SHOW',payload:`you added ${content}`})
+        setTimeout(()=>notifDispatch({type:'HIDE'}),3000)
+      },
+      onError:()=>{
+        notifDispatch({type:'SHOW',payload:`${content}not added beacuse is to short, must be at least 5 characters`})
+        setTimeout(()=>notifDispatch({type:'HIDE'}),3000)}
+      }
+    )
+
+        
     event.target.anecdote.value = ''
-    console.log('new anecdote')
+    
 }
 
   return (
