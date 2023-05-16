@@ -32,7 +32,6 @@ const App = () => {
             : anec
         ))
       }
-        
     })
     console.log('vote')
   }
