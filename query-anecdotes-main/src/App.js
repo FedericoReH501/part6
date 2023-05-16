@@ -1,15 +1,17 @@
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
-import axios from 'axios'
 import {useQuery} from 'react-query'
 import {getAll} from './request'
 
 const App = () => {
-  const baseUrl = 'http://localhost:3001/anecdotes'
-  const result = useQuery('anecdotes',() => axios.get(baseUrl).then(res => res.data))
+  
+  const result = useQuery('anecdotes',() => getAll))
   
   if(result.isLoading){
     return <div>Loading...</div>
+  }
+  else if (result.isError){
+    return <div>anecdotes service not available due to problem in server</div>
   }
 
   const anecdotes = result.data
@@ -17,10 +19,6 @@ const App = () => {
   const handleVote = (anecdote) => {
     console.log('vote')
   }
-
-
-
-  
 
   return (
     <div>
