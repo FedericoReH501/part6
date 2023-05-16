@@ -1,10 +1,9 @@
 import { createNew } from "../request"
 import { useMutation, useQueryClient } from "react-query"
-import { useContext } from 'react'
-import CounterContext from '../notificationContext'
+import {useNotifyDispatch} from '../notificationContext'
 
 const AnecdoteForm = () => {
-  const [notifState,notifDispatch] = useContext(CounterContext)
+  const notifDispatch = useNotifyDispatch()
   const newAnecMutations = useMutation(createNew)
   const queryClient = useQueryClient() 
   

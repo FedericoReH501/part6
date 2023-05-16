@@ -2,13 +2,13 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import {useQuery,useMutation,useQueryClient} from 'react-query'
 import {getAll,updateOne} from './request'
-
+import {useNotifyDispatch} from './notificationContext'
 const App = () => {
   
   const result = useQuery('anecdotes',getAll,{refetchOnWindowFocus:false})
   const newVoteMutation = useMutation(updateOne)
   const queryClient = useQueryClient()
-  
+  const notifDispatch = useNotifyDispatch()
   
   console.log(result)
   
@@ -32,6 +32,8 @@ const App = () => {
             ? updatedAnec
             : anec
         ))
+        notifDispatch({type:'SHOW',payload:`${anecdote.content} voted`})
+        setTimeout(()=>notifDispatch({type:'HIDE'}),3000)
       }
     })
     console.log('vote')

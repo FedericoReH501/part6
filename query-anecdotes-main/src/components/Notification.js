@@ -1,8 +1,8 @@
-import { useContext } from 'react'
-import CounterContext from '../notificationContext'
+
+import {useNotifValue} from '../notificationContext'
 
 const Notification = () => {
-  const [notifState,notifDispatch] = useContext(CounterContext)
+  const notifState = useNotifValue()
   const style = {
     border: 'solid',
     padding: 10,
