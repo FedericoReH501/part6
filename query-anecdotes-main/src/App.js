@@ -9,6 +9,7 @@ const App = () => {
   const newVoteMutation = useMutation(updateOne)
   const queryClient = useQueryClient()
   
+  
   console.log(result)
   
   if(result.isLoading){
@@ -39,10 +40,9 @@ const App = () => {
   return (
     <div>
       <h3>Anecdote app</h3>
-    
-      <Notification />
-      <AnecdoteForm />
-    
+      
+        <Notification />
+        <AnecdoteForm />
       {anecdotes.map(anecdote =>
         <div key={anecdote.id}>
           <div>

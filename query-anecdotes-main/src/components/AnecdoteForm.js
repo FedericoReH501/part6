@@ -1,15 +1,20 @@
 import { createNew } from "../request"
 import { useMutation, useQueryClient } from "react-query"
+import { useContext } from 'react'
+import CounterContext from '../notificationContext'
 
 const AnecdoteForm = () => {
+  const [notifState,notifDispatch] = useContext(CounterContext)
   const newAnecMutations = useMutation(createNew)
   const queryClient = useQueryClient() 
+  
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
-    
     newAnecMutations.mutate({content, votes:0},
       {onSuccess: ()=>queryClient.invalidateQueries('anecdotes')})
+    notifDispatch({type:'SHOW',payload:`you added ${content}`})
+    setTimeout(()=>notifDispatch({type:'HIDE'}),3000)
     event.target.anecdote.value = ''
     console.log('new anecdote')
 }
